@@ -45,7 +45,6 @@ const emptyPickedWordSpan = () => {
   document.querySelector(".lose p span").innerHTML = " ";
 };
 
-
 const pickRandomWord = function (list) {
   let index = Math.floor(Math.random() * list.length);
   randomPickedWord = (list[index].split(""));
