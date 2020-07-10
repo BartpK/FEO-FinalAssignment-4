@@ -19,6 +19,8 @@ const correctLettersDisplayElement = document.getElementById("currentword");
 const guessbutton = document.getElementById("guessbutton");
 const restartbutton = document.getElementById("restartbutton");
 const livespanElement = document.querySelector(".lives span");
+const hangmanImage = document.getElementById("gallows");
+const winorloseBackground = document.getElementById("winlosebackground");
 
 // all functions
 const displayRemainingTries = () => {
@@ -45,6 +47,10 @@ const emptyPickedWordSpan = () => {
   document.querySelector(".lose p span").innerHTML = " ";
 };
 
+const changeHangmanState = () => {
+  hangmanImage.src = `assets/Gallows0${remainingTries}.svg`
+}
+
 const pickRandomWord = function (list) {
   let index = Math.floor(Math.random() * list.length);
   randomPickedWord = (list[index].split(""));
@@ -62,16 +68,17 @@ const cleanInputField = function () {
 
 const decrementRemainingTries = () => {
   remainingTries--;
-
 };
 
 const winTheGame = function () {
   document.querySelector(".win").style.display = "block";
+  winorloseBackground.className = "wonbackground";
   gameOver = true;
 };
 
 const LoseGame = function () {
   document.querySelector(".lose").style.display = "block";
+  winorloseBackground.className = "lostbackground";
   spanTheRandomPickedWordInDOM();
   gameOver = true;
 };
@@ -92,7 +99,7 @@ const resetAllUNiqueInputtedLetters = () => {
 
 const checkIfGameOVer = (remainingTries) => {
   return (remainingTries == 0)
-}
+};
 
 const checkIfGameWon = function (word, inputs) {
   let lettersNotYetGuessed = word.filter(function (letter) {
@@ -113,6 +120,7 @@ const updateAllUniqueInputtedLetters = function (randomWord, input) {
     allUniqueInputtedLetters.push(input);
     decrementRemainingTries();
     displayRemainingTries();
+    changeHangmanState();
 
   }
   if (randomWord.includes(input) && (!allUniqueInputtedLetters.includes(input))) {
@@ -167,6 +175,8 @@ const beginTheGameWithPlayer = () => {
   emptyDisplayWrongGuessedLetters();
   resetAllUNiqueInputtedLetters();
   displayRemainingTries();
+  changeHangmanState();
+  winorloseBackground.className = "";
 };
 
 beginTheGameWithPlayer();
