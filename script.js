@@ -60,7 +60,7 @@ const updateTriesDisplay = function (tries) {
 
 
 
-
+//Make unit test
 const letters = function (word, inputs) {
   let wrongLetters = inputs.filter(function (letter) {
     // If the letter is in the word return.... false/true (we want to remove that then)
@@ -68,6 +68,7 @@ const letters = function (word, inputs) {
   });
   document.querySelector(".guessed_letters").innerHTML = wrongLetters.join(" ");
 };
+
 
 //Gebruik deze syntax voor module exports
 try {

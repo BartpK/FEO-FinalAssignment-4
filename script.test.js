@@ -1,7 +1,87 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const decrementTries = require("./test functions/decrementTries.js");
 const updateGuessedLettersArray = require("./test functions/updateGuessedLettersArray")
 const checkIfGameOver = require("./test functions/checkIfGameOver")
 const updateWrongLetters = require("./test functions/updateWrongLetters")
+const checkIfGameWon = require("./test functions/checkIfGameWon.js")
 
 
 describe("Test if tries decrement", () => {
@@ -51,15 +131,27 @@ describe("Test function that checks if game is over", () => {
 
 describe("Test function that updates array with incorrect guesses", () => {
 
-
     test("check if function filters correct guesses from return", function () {
         word = ["v", "i", "s"];
         expect(updateWrongLetters(word, ["b", "a", "v"])).toEqual(["b", "a"]);
     });
 
-    test("check if function return empty array if all guesses are correct", function () {
+    test("check if function returns empty array if all guesses are correct", function () {
         word = ["v", "i", "s"];
         expect(updateWrongLetters(word, ["v", "i", "s"])).toEqual([]);
+    });
+})
+
+describe("Test function that checks whether game has been won", () => {
+
+    test("check if function returns true if inputs match word", function () {
+        word = ["v", "i", "s"];
+        expect(checkIfGameWon(word, ["v", "i", "s"])).toEqual(true);
+    });
+
+    test("check if function returns false if inputs don't match word", function () {
+        word = ["v", "i", "s"];
+        expect(checkIfGameWon(word, ["b", "a", "k"])).toEqual(false);
     });
 
 })
