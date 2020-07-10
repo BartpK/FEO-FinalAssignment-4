@@ -3,6 +3,9 @@ const updateGuessedLettersArray = require("./test functions/updateGuessedLetters
 const checkIfGameOver = require("./test functions/checkIfGameOver")
 const updateWrongLetters = require("./test functions/updateWrongLetters")
 const checkIfGameWon = require("./test functions/checkIfGameWon.js")
+const pickRandomWord = require("./test functions/pickRandomWord");
+const updateAllUniqueInputtedLetters = require("./test functions/updateAllUniqueInputtedLetters");
+const updateCorrectGuessedLetters = require("./test functions/updateCorrectGuessedLetters")
 
 
 describe("Test if tries decrement", () => {
@@ -79,35 +82,13 @@ describe("Test function that checks whether game has been won", () => {
 
 // functionaliteit: selecteren van het random woord
 test(`pickRandomWord should return a random word from the wordList as an array`, () => {
-    const pickRandomWord = function (list) {
-        let index = Math.floor(Math.random() * list.length);
-        let randomPickedWord = (list[index].split(""));
-        return randomPickedWord;
-    }
-
     expect(pickRandomWord(wordList)).toEqual([`v`, `i`, `s`])
 });
 
 //functionaliteit: checken of een letter voorkomt in het woord
 describe(`updateAllUniqueInputtedLetters should update array with all the letters that are once inputted
 by the user`, () => {
-    let allUniqueInputtedLetters = [`i`, `v`];
-    const updateAllUniqueInputtedLetters = function (randomPickedWord, input) {
-        if (!input.match(/^[a-zA-Z]+$/)) { return allUniqueInputtedLetters; }
-        if (allUniqueInputtedLetters.includes(input) || input === "") {
-            return allUniqueInputtedLetters;
-        }
 
-        if (!randomPickedWord.includes(input) && (!allUniqueInputtedLetters.includes(input))) {
-            allUniqueInputtedLetters.push(input);
-
-        }
-        if (randomPickedWord.includes(input) && (!allUniqueInputtedLetters.includes(input))) {
-            allUniqueInputtedLetters.push(input);
-
-        };
-        return allUniqueInputtedLetters;
-    }
     test("updateAllUniqueInputtedLetters", () => {
         expect(updateAllUniqueInputtedLetters([`g`, `e`, `e`, `u`, `w`], `t`)).toEqual([`i`, `v`, `t`]);
     });
@@ -124,17 +105,7 @@ by the user`, () => {
 // functionaliteit: updaten van de goed geraden letters
 describe(`updateCorrectGuessedLetters should update the letters that are already guessed correctly by the user
 with the array of unique inputs`, () => {
-    const updateCorrectGuessedLetters = (randomPickedWord, uniqueInputletters) => {
-        let correctGuessedLetters = randomPickedWord.map(function (letterFromPickedWord) {
-            if (uniqueInputletters.includes(letterFromPickedWord)) {
-                return letterFromPickedWord;
-            } else {
-                return "_";
-            }
-        })
 
-        return correctGuessedLetters;
-    }
     test(`vis as random word and vesab as uniqueinputted letters`, () => {
         expect(updateCorrectGuessedLetters([`v`, `i`, `s`], [`v`, `e`, `s`, `a`, `b`])).toEqual([`v`, `_`, `s`])
     })
