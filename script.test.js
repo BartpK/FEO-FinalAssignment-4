@@ -1,6 +1,8 @@
 const decrementTries = require("./test functions/decrementTries.js");
 const updateGuessedLettersArray = require("./test functions/updateGuessedLettersArray")
 const checkIfGameOver = require("./test functions/checkIfGameOver")
+const updateWrongLetters = require("./test functions/updateWrongLetters")
+
 
 describe("Test if tries decrement", () => {
 
@@ -43,6 +45,21 @@ describe("Test function that checks if game is over", () => {
     test("Returns true if remainingTries <= 0", function () {
         remainingTries = 0;
         expect(checkIfGameOver(remainingTries)).toBe(true);
+    });
+
+})
+
+describe("Test function that updates array with incorrect guesses", () => {
+
+
+    test("check if function filters correct guesses from return", function () {
+        word = ["v", "i", "s"];
+        expect(updateWrongLetters(word, ["b", "a", "v"])).toEqual(["b", "a"]);
+    });
+
+    test("check if function return empty array if all guesses are correct", function () {
+        word = ["v", "i", "s"];
+        expect(updateWrongLetters(word, ["v", "i", "s"])).toEqual([]);
     });
 
 })
