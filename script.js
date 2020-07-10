@@ -108,6 +108,15 @@ const checkIfGameWon = function (word, inputs) {
   return (lettersNotYetGuessed.length === 0)
 };
 
+const checkIfPlayerWonOrLost = (randomWord, letters) => {
+  if (checkIfGameWon(randomWord, letters) == true) {
+    winTheGame()
+  };
+  if (checkIfGameOVer(remainingTries) == true) {
+    LoseGame()
+  };
+}
+
 const updateAllUniqueInputtedLetters = function (randomWord, input) {
   cleanInputField();
   if (gameOver == true) { return; };
@@ -131,15 +140,7 @@ const updateAllUniqueInputtedLetters = function (randomWord, input) {
   updateWrongLetters(randomWord, allUniqueInputtedLetters);
   console.log(`all unique inputted letters: ${allUniqueInputtedLetters}`);
 
-  if (checkIfGameWon(randomWord, allUniqueInputtedLetters) == true) {
-    //console.log("gewonnen")
-    winTheGame()
-  };
-  if (checkIfGameOVer(remainingTries) == true) {
-    //console.log("verloren")
-    LoseGame()
-  };
-
+  checkIfPlayerWonOrLost(randomWord, allUniqueInputtedLetters);
 };
 
 const updateCorrectGuessedLetters = (randomWord, uniqueInputletters) => {
@@ -161,6 +162,7 @@ const updateWrongLetters = function (word, inputs) {
   });
   console.log(`wrong letters: ${wrongLettersArray}`);
   displayWrongGuessedLetters(wrongLettersArray);
+
 };
 
 const beginTheGameWithPlayer = () => {
@@ -177,12 +179,16 @@ const beginTheGameWithPlayer = () => {
   displayRemainingTries();
   changeHangmanState();
   winorloseBackground.className = "";
+  updateCorrectGuessedLetters(randomPickedWord, allUniqueInputtedLetters);
 };
 
-beginTheGameWithPlayer();
+
 
 restartbutton.addEventListener("click", function () { beginTheGameWithPlayer(); })
 guessbutton.addEventListener("click", function () {
   const input = document.querySelector("input").value;
   updateAllUniqueInputtedLetters(randomPickedWord, input)
 });
+
+beginTheGameWithPlayer();
+

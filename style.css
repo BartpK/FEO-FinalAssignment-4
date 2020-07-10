@@ -12,6 +12,7 @@ body {
   background: rgb(102,102,102);
   background: linear-gradient(6deg, rgba(102,102,102,1) 0%, rgba(28,28,28,1) 82%);
   overflow-x: hidden;
+  min-height: 100vh;
 }
 
 #left{
@@ -50,7 +51,7 @@ input {
 }
 
 #gallows {
-  width: 750px;
+  width: 650px;
   grid-row: 2/2;
   grid-column: 1/-1;
   display: block;
@@ -137,7 +138,7 @@ button:hover {
 	height:100%;
 	overflow:hidden;
 	position:absolute;
-	animation:flash 5s linear infinite;
+	animation:flash 4s linear infinite;
 }
 
 .wonbackground {
