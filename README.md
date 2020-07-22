@@ -1,4 +1,4 @@
-# Simple-to-do-app
+# FEO-FinalAssignment-5
 
-A simple to-do app. Connected via API to Firebase real-time database.
+
 
